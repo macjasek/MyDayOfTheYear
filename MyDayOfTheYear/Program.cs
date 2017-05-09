@@ -15,6 +15,12 @@ namespace MyDayOfTheYear
             var year = int.Parse(Console.ReadLine());
             Console.WriteLine("Podaj miesiac urodzenia");
             var month = int.Parse(Console.ReadLine());
+            while (month < 1 || month > 12)
+            {
+                Console.WriteLine("Miesiąc powinien być liczbą w przedziale od 1 do 12");
+                month = int.Parse(Console.ReadLine());
+            }
+
             Console.WriteLine("Podaj dzień swoich urodzin");
             var day = int.Parse(Console.ReadLine());
 
