@@ -12,6 +12,17 @@ namespace MyDayOfTheYear
         {
             Console.WriteLine("Podaj rok urodzenia");
             int year = int.Parse(Console.ReadLine());
+
+            //sprawdzenie czy rok przestępny
+            string yesno = " nie";
+            int lapYear = 0;
+
+            if ((year % 4) == 0)
+            {
+                yesno = "";
+                lapYear = 1;
+            }
+
             Console.WriteLine("Podaj miesiac urodzenia");
             int month = int.Parse(Console.ReadLine());
 
@@ -21,28 +32,26 @@ namespace MyDayOfTheYear
                 month = int.Parse(Console.ReadLine());
             }
 
+            var daysArray = new int[] { 0, 31, 28 + lapYear, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
             Console.WriteLine("Podaj dzien swoich urodzin");
             int day = int.Parse(Console.ReadLine());
 
-            var birthday = new DateTime(year,month,day);
-            var dayZero = new DateTime(year - 1, 12, 31);
-
-            int myDayOfTheYear = (birthday - dayZero).Days;
-
-            string yesno = " nie";
-
-            //sprawdzenie czy rok przestępny
-            var day1 = new DateTime(year, 3, 1);
-            var day2 = new DateTime(year, 2, 28);
-            TimeSpan daycheck = day1 - day2;
-
-            if (daycheck.Days > 1 )
+            while (day > daysArray[month])
             {
-                yesno = "";
+                Console.WriteLine($"Maksymalna liczba dni w {month} miesiacu roku to {daysArray[month]}.");
+                Console.WriteLine("Podaj dzien swoich urodzin");
+                day = int.Parse(Console.ReadLine());
+            }
+
+            int myDayOfTheYear = day;
+
+            for (int i = 0; i < month; i++)
+            {
+                myDayOfTheYear += daysArray[i];  
             }
 
             Console.WriteLine($"Dzien Twoich urodzin byl {myDayOfTheYear} dniem roku i{yesno} byl to rok przestępny.");
-
         }
     }
 }
